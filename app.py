@@ -68,6 +68,9 @@ st.sidebar.markdown("---")
 if st.sidebar.button("Run Pipeline"):
     # This would trigger the backend scripts
     st.sidebar.info("Running pipeline...")
+    # Force reload data
+    st.cache_data.clear()
+
     os.system(
         "python src/rules.py && python src/evaluator.py && python src/scorer.py && python src/reporter.py"
     )

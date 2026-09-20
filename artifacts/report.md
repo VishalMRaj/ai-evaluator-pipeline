@@ -5,8 +5,8 @@
 | Case ID | Score | Status |
 |---|---|---|
 | case_001 | 30 | fail |
-| case_002 | 30 | fail |
-| case_003 | 30 | fail |
+| case_002 | 70 | review |
+| case_003 | 20 | fail |
 
 ## Top Failure Patterns
 - Risky absolute language usage in assistant responses.

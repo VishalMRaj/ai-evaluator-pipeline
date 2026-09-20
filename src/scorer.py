@@ -1,5 +1,5 @@
 import json
-from src.models import RuleCheck, LLMEvaluation, FinalScore
+from models import RuleCheck, LLMEvaluation, FinalScore
 from typing import List
 
 

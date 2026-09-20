@@ -1,5 +1,5 @@
 import json
-from src.models import Case, RuleCheck
+from models import Case, RuleCheck
 
 
 def run_rule_checks(cases: List[Case]) -> List[RuleCheck]:

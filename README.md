@@ -23,7 +23,7 @@ A production-minded evaluation pipeline for assessing AI customer support respon
 ## Running
 1. Start Backend:
    ```bash
-   uvicorn main:app --port 8000
+   uvicorn src.main:app --port 8000
    ```
 2. Start UI:
    ```bash
@@ -33,3 +33,19 @@ A production-minded evaluation pipeline for assessing AI customer support respon
    ```bash
    curl http://localhost:8000/run-pipeline
    ```
+
+## UI Dashboard Overview
+The Streamlit dashboard allows for:
+- **Pipeline Monitoring**: View status and metrics of processed cases.
+- **Artifact Inspection**: Interactive data tables to view rule-check results and LLM evaluations.
+- **Visual Analytics**: Scoring trend visualization via bar charts.
+- **Orchestration**: Direct trigger button to run the entire pipeline workflow from the UI.
+
+### Pipeline Dashboard
+![Pipeline Overview](artifacts/ai_evaluator_dashboard.png)
+
+### LLM Evaluation Insights
+![Evaluation Results](artifacts/llm_evals_ui.png)
+
+### Final Scoring Summary
+![Final Scores](artifacts/final_score_ui.png)

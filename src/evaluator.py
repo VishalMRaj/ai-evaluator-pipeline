@@ -2,31 +2,32 @@ import json
 import os
 from datetime import datetime
 from typing import List
-from src.models import Case, LLMEvaluation
+from models import Case, LLMEvaluation
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 
-# Mock evaluator for pipeline demo/fallback
-def get_mock_evaluation(case: Case) -> LLMEvaluation:
-    return LLMEvaluation(
-        case_id=case.case_id,
-        policy_adherence="warning",
-        customer_helpfulness="warning",
-        risk_level="medium",
-        reasoning=["This is a mock evaluation result due to no API key."],
-        policy_violations=["None identified by mock."],
-        recommended_fix="Refine response to align with policy.",
-    )
+from google import genai
+from google.genai import types
+import os
+
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
 def evaluate_case(case: Case) -> LLMEvaluation:
-    # Logic to interface with Gemini goes here.
-    # For now, using mock since API key might be missing in this env.
-    return get_mock_evaluation(case)
+    prompt = build_system_prompt(case)
+    response = client.models.generate_content(
+        model="gemini-3.1-flash-lite",
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json", response_schema=LLMEvaluation
+        ),
+    )
+
+    return LLMEvaluation.model_validate_json(response.text)
+
 
 def build_system_prompt(case: Case) -> str:
-    # Guardrail: Encapsulate user input in clear delimiters to prevent injection
     return f"""
 You are an expert AI evaluator. Your task is to evaluate an assistant's response based on the provided policy context and deterministic rule results.
 
@@ -37,10 +38,10 @@ You are an expert AI evaluator. Your task is to evaluate an assistant's response
 
 --- DATA ---
 USER MESSAGE:
-"""{case.user_message}"""
+{case.user_message}
 
 ASSISTANT RESPONSE:
-"""{case.assistant_response}"""
+{case.assistant_response}
 
 POLICY CONTEXT:
 {json.dumps(case.policy_context.model_dump())}
@@ -50,11 +51,28 @@ DETERMINISTIC RULE SIGNALS:
 """
 
 
-
 def run_evaluation(cases: List[Case]):
     evaluations = []
     log_file = "artifacts/llm_calls.jsonl"
-...
+
+    # Generate evaluations and map case_ids correctly
+    for case in cases:
+        eval_result = evaluate_case(case)
+        # Force the case_id to match the input case
+        eval_result.case_id = case.case_id
+        evaluations.append(eval_result)
+
+        # Log the call
+        log_entry = {
+            "stage": "LLM_EVAL",
+            "case_id": case.case_id,
+            "timestamp": datetime.now().isoformat(),
+            "provider": "google-gemini",
+            "model": "gemini-3.1-flash-lite",
+            "prompt_hash": "prod_hash",
+            "input_artifacts": ["artifacts/cases.json", "artifacts/rule_checks.json"],
+            "output_artifact": "artifacts/llm_evaluations.json",
+        }
         with open(log_file, "a") as lf:
             lf.write(json.dumps(log_entry) + "\n")
 

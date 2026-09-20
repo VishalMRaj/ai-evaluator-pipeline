@@ -7,14 +7,14 @@
   },
   {
     "case_id": "case_002",
-    "score": 30,
-    "status": "fail",
-    "explanation": "Deducted 40: Risky absolute language detected. | Deducted 30: Missing required points."
+    "score": 70,
+    "status": "review",
+    "explanation": "Deducted 30: Missing required points."
   },
   {
     "case_id": "case_003",
-    "score": 30,
+    "score": 20,
     "status": "fail",
-    "explanation": "Deducted 40: Risky absolute language detected. | Deducted 30: Missing required points."
+    "explanation": "Deducted 30: Missing required points. | Capped at 20: High risk level."
   }
 ]
