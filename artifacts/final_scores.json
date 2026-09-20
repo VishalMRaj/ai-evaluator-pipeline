@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "case_001",
+    "score": 30,
+    "status": "fail",
+    "explanation": "Deducted 40: Risky absolute language detected. | Deducted 30: Missing required points."
+  },
+  {
+    "case_id": "case_002",
+    "score": 30,
+    "status": "fail",
+    "explanation": "Deducted 40: Risky absolute language detected. | Deducted 30: Missing required points."
+  },
+  {
+    "case_id": "case_003",
+    "score": 30,
+    "status": "fail",
+    "explanation": "Deducted 40: Risky absolute language detected. | Deducted 30: Missing required points."
+  }
+]

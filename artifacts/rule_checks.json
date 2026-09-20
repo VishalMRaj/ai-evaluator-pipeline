@@ -1,0 +1,23 @@
+[
+  {
+    "case_id": "case_001",
+    "sensitive_info_detected": true,
+    "absolute_guarantee_detected": true,
+    "required_points_covered": false,
+    "response_length": 82
+  },
+  {
+    "case_id": "case_002",
+    "sensitive_info_detected": false,
+    "absolute_guarantee_detected": true,
+    "required_points_covered": false,
+    "response_length": 72
+  },
+  {
+    "case_id": "case_003",
+    "sensitive_info_detected": false,
+    "absolute_guarantee_detected": true,
+    "required_points_covered": false,
+    "response_length": 76
+  }
+]

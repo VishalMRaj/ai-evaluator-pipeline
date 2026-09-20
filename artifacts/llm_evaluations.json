@@ -1,0 +1,41 @@
+[
+  {
+    "case_id": "case_001",
+    "policy_adherence": "warning",
+    "customer_helpfulness": "warning",
+    "risk_level": "medium",
+    "reasoning": [
+      "This is a mock evaluation result due to no API key."
+    ],
+    "policy_violations": [
+      "None identified by mock."
+    ],
+    "recommended_fix": "Refine response to align with policy."
+  },
+  {
+    "case_id": "case_002",
+    "policy_adherence": "warning",
+    "customer_helpfulness": "warning",
+    "risk_level": "medium",
+    "reasoning": [
+      "This is a mock evaluation result due to no API key."
+    ],
+    "policy_violations": [
+      "None identified by mock."
+    ],
+    "recommended_fix": "Refine response to align with policy."
+  },
+  {
+    "case_id": "case_003",
+    "policy_adherence": "warning",
+    "customer_helpfulness": "warning",
+    "risk_level": "medium",
+    "reasoning": [
+      "This is a mock evaluation result due to no API key."
+    ],
+    "policy_violations": [
+      "None identified by mock."
+    ],
+    "recommended_fix": "Refine response to align with policy."
+  }
+]
